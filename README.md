@@ -124,7 +124,8 @@ game.LoadMap({
     {"█","█","█","█","█","█","█","█","█","█","█","█"}
 });
 
-
+//std::string** map = game.GetMap();
+//map[player.GetY()][player.GetX()] = player.GetEntityTile();
 Render::Rend(game);
 ```
 
