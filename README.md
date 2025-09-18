@@ -130,16 +130,6 @@ Render::Rend(game);
 ```
 
 
-Проверка состояния жизни и смена тайла:
-```cpp
-if (!player.GetAlive()) {
-    // например, показать надпись
-    Render::UIRender("Game Over");
-    break;
-}
-
-```
-
 ---
 
 ## Работа с MapMaker (редактор карт)
