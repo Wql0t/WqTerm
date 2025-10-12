@@ -43,6 +43,13 @@ class Zone {
         int x2, y2;
         std::string name;
     public:
+    Zone(int x_a, int y_a, int x_b, int y_b, std::string n)
+        : name(n) {
+        x1 = (x_a < x_b) ? x_a : x_b; 
+        x2 = (x_a > x_b) ? x_a : x_b;
+        y1 = (y_a < y_b) ? y_a : y_b;
+        y2 = (y_a > y_b) ? y_a : y_b;
+    }
     bool contains(int x, int y) const {
         return x >= x1 && x <= x2 && y >= y1 && y <= y2;
     }
@@ -52,6 +59,7 @@ class Zone {
     int getX2() const { return x2; }
     int getY2() const { return y2; }
 };
+
 class Entity {
     private:
         int x;
@@ -103,12 +111,14 @@ class Game {
     void addZone(const Zone& zone) {
         zones.push_back(zone);
     }
-    Zone* getZoneAt(int x, int y) {
+    std::vector<Zone*> getZonesAt(int x, int y) {
+        std::vector<Zone*> found_zones;
         for (auto& zone : zones) {
             if (zone.contains(x, y)) {
-                return &zone;
+                found_zones.push_back(&zone);
             }
         }
+        return found_zones;
     }
     int GetH() const { return HEIGHT; }
         int GetW() const { return WIDTH; }
