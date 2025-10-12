@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <unordered_map>
 #include <string>
+#include <vector>
 
 char getch() {
     char buf = 0;
@@ -36,6 +37,21 @@ return buf;
 const std::string COLOR_RESET = "\033[0m";
 const std::string PLAYER_COLOR = "\033[1;32m";  
 const std::string WALL_COLOR = "\033[1;31m";  
+class Zone {
+    private:
+        int x1, y1;
+        int x2, y2;
+        std::string name;
+    public:
+    bool contains(int x, int y) const {
+        return x >= x1 && x <= x2 && y >= y1 && y <= y2;
+    }
+    const std::string& getName() const { return name; }
+    int getX1() const { return x1; }
+    int getY1() const { return y1; }
+    int getX2() const { return x2; }
+    int getY2() const { return y2; }
+};
 class Entity {
     private:
         int x;
@@ -79,12 +95,21 @@ class Entity {
         };
 class Game {
     private:
-        
+        std::vector<Zone> zones;
         int HEIGHT;
         int WIDTH;
         std::string** map;
     public:
-    
+    void addZone(const Zone& zone) {
+        zones.push_back(zone);
+    }
+    Zone* getZoneAt(int x, int y) {
+        for (auto& zone : zones) {
+            if (zone.contains(x, y)) {
+                return &zone;
+            }
+        }
+    }
     int GetH() const { return HEIGHT; }
         int GetW() const { return WIDTH; }
         std::string** GetMap() const { return map; }
