@@ -73,34 +73,6 @@ sound::play("./laser.wav", /*interrupt*/ true);
 
 ---
 
-## Обзор API
-
-
-- **Entity**:
-  - Данные: `x`, `y`, `isAlive`, `tile`
-  - Методы: `GetX/SetX`, `GetY/SetY`, `GetEntityTile`, `GetAlive/SetAlive`
-  - Конструктор: `Entity(int x, int y, std::string tile)`
-
-- **Keybind**:
-  - `bind(char key, std::function<void()>)`
-  - `handle(char key)` — вызывает привязанную функцию, если есть
-
-- **Game**:
-  - Конструктор: `Game(int height, int width)` — выделяет `HEIGHT x WIDTH` карту строк
-  - `GetH()`, `GetW()`, `GetMap()` — доступ к размерам и сырым данным карты (`std::string**`)
-  - `LoadMap(std::initializer_list<std::initializer_list<std::string>>)` — заполнение карты
-
-- **Render**:
-  - `Render::Rend(Game&)` — очистка экрана и вывод всей карты
-  - `Render::UIRender(...)` — перегружен для `initializer_list<string>`, `string`, `const char*`
-
-- **sound**:
-  - `sound::play(filepath, interrupt=false)` — проигрывает файл через SoX `play`
-
-Замечание: `Render::Rend` печатает содержимое ячеек как есть. Используйте Unicode (например, "█", "☻", "✵") и ANSI-цвета прямо в строках.
-
----
-
 ## Entity: создание, перемещение, отрисовка
 
 Создание игрока и размещение на карте `Game`:
